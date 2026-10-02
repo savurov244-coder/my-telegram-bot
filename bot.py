@@ -3,7 +3,9 @@ import re
 import asyncio
 import tempfile
 from pathlib import Path
+from threading import Thread
 
+from flask import Flask
 from pyrogram import Client, filters
 from pyrogram.types import (
     Message,
@@ -14,6 +16,24 @@ from pyrogram.types import (
 from pyrogram.enums import ParseMode
 
 import yt_dlp
+
+
+# =========================================================
+# WEB SERVER (RENDER PORT BINDING FIX)
+# =========================================================
+
+web_app = Flask('')
+
+@web_app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 8080))
+    web_app.run(host='0.0.0.0', port=port)
+
+# Serverni orqa fonda ishga tushirish
+Thread(target=run_web, daemon=True).start()
 
 
 # =========================================================
