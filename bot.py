@@ -423,4 +423,8 @@ async def main_handler(client: Client, message: Message):
 
 if __name__ == "__main__":
     print("🤖 Bot muvaffaqiyatli ishga tushdi...")
-    app.run()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(app.start())
+    print("✅ Bot jonli rejimda ishlamoqda!")
+    loop.run_forever()
