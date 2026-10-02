@@ -255,7 +255,7 @@ async def start_handler(
                 ),
 
                 InlineKeyboardButton(
-                    "ℹ️️ Yordam",
+                    "ℹ️ Yordam",
                     callback_data="help"
                 )
             ]
