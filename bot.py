@@ -103,7 +103,11 @@ async def download_audio(
     else:
         search_query = query
 
-    loop = asyncio.get_event_loop()
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
 
     def download():
 
@@ -251,7 +255,7 @@ async def start_handler(
                 ),
 
                 InlineKeyboardButton(
-                    "ℹ️ Yordam",
+                    "ℹ️️ Yordam",
                     callback_data="help"
                 )
             ]
@@ -441,5 +445,11 @@ async def main_handler(
 if __name__ == "__main__":
 
     print("🤖 Bot muvaffaqiyatli ishga tushdi...")
+
+    try:
+        main_loop = asyncio.get_event_loop()
+    except RuntimeError:
+        main_loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(main_loop)
 
     app.run()
